@@ -1,4 +1,4 @@
-# 💸 Debt Manager App (Serverless GenAI App)
+# 💸 Debt Manager App (Serverless GenAI App) 🚧 *(WIP)*
 
 ## Description
 
