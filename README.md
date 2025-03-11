@@ -23,3 +23,20 @@
 🏗️ Built on a modern serverless architecture using AWS Lambda, Bedrock, OpenSearch, and React, the application scales automatically while maintaining cost efficiency.
 
 🔮 debt-manager-app helps users make smarter financial decisions by simulating various repayment approaches, calculating interest savings, visualizing payoff timelines, and providing educational context—all within an intuitive interface.
+
+## Run project with docker 🚢📦🐋
+
+### Build Docker Image 🏗️
+```bash
+docker build -t debt-manager-app .
+```
+
+### Run the Application 🌐
+```bash
+docker run -v "$(pwd):/app" -p 8888:8888 \
+  -e AWS_ACCESS_KEY_ID="your-access-key" \
+  -e AWS_SECRET_ACCESS_KEY="your-secret-key" \
+  -e AWS_DEFAULT_REGION="xx-xxx-x" \
+  -e CDK_DEFAULT_ACCOUNT="XXXX" \
+  debt-manager-app
+```
