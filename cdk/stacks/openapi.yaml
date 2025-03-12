@@ -1,0 +1,68 @@
+openapi: "3.0.1"
+info:
+  title: "Multi-Agent Debt & Investment Advice API"
+  version: "1.0"
+paths:
+  /agent/debt:
+    post:
+      summary: "Invoke the debt advice agent"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: "User query regarding debt advice"
+      responses:
+        '200':
+          description: "Debt advice response"
+      x-amazon-apigateway-integration:
+        uri: "${debt_lambda_uri}"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+  /agent/investment:
+    post:
+      summary: "Invoke the investment advice agent"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: "User query regarding investment advice"
+      responses:
+        '200':
+          description: "Investment advice response"
+      x-amazon-apigateway-integration:
+        uri: "${investment_lambda_uri}"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
+  /agent/orchestrator:
+    post:
+      summary: "Invoke the orchestrator agent (aggregates responses from debt and investment agents)"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: "User query for combined advice"
+      responses:
+        '200':
+          description: "Aggregated agent response"
+      x-amazon-apigateway-integration:
+        uri: "${orchestrator_lambda_uri}"
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "aws_proxy"
